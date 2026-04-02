@@ -10,6 +10,8 @@ public class Fracao {
 
     private boolean sinal;  // true para fração não-negativo
 
+    private Fracao fracaoIrredutivelCacheada;
+
     public Fracao(int numerador, int denominador) {
         this(Math.abs(numerador), Math.abs(denominador),
                 Aritmetica.obterSinal(numerador) == Aritmetica.obterSinal(denominador));
@@ -30,7 +32,8 @@ public class Fracao {
 
         this.numerador = numerador;
         this.denominador = denominador;
-        this.sinal = sinal;
+        this.sinal = numerador == 0 ? true : sinal;
+        this.fracaoIrredutivelCacheada = null;  // praticaremos lazy instantiation
     }
 
     public int getNumerador() {
@@ -45,6 +48,24 @@ public class Fracao {
         return sinal;
     }
 
+    public double getValorNumerico() {
+        return (sinal ? 1.0 : -1.0) * numerador / denominador;
+    }
+
+    public Fracao getFracaoIrredutivel() {
+        if (fracaoIrredutivelCacheada != null) {
+            return fracaoIrredutivelCacheada;
+        }
+
+        int mdc = Aritmetica.calcularMdc(numerador, denominador);
+        if (mdc == 1) {
+            return this;
+        }
+        Fracao fracaoIrredutivel = new Fracao(numerador / mdc, denominador / mdc, sinal);
+        fracaoIrredutivelCacheada = fracaoIrredutivel;
+        return fracaoIrredutivel;
+    }
+
     @Override
     public String toString() {
         if (numerador == 0) {
@@ -54,5 +75,12 @@ public class Fracao {
         return (!sinal ? "-" : "") +
                 numerador +
                 (denominador != 1 ? String.valueOf(SEPARADOR) + denominador : "");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Fracao outraFracao = (Fracao) o;
+        return getValorNumerico() == outraFracao.getValorNumerico();
     }
 }

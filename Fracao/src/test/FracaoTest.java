@@ -3,8 +3,7 @@ package test;
 import main.Fracao;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class FracaoTest {
 
@@ -44,5 +43,44 @@ class FracaoTest {
             System.out.println("capturei a exceção!!");
             // ok!!!! Era pra entrar aqui mesmo!!!!!
         }
+    }
+// outro jeito (muito mais simples!) de se testar o lançamento de exceção
+//    @Test
+//    public void testarExcecaoSeDenominadorNulo() {
+//        assertThrows(RuntimeException.class, () ->
+//                new Fracao(18, 0));
+//    }
+
+    @Test
+    public void testarGetValorNumerico() {
+        assertEquals(0.5,
+                (new Fracao(3, 6)).getValorNumerico());
+        assertEquals(-0.5,
+                (new Fracao(3, -6)).getValorNumerico());
+        assertEquals(-0.5,
+                (new Fracao(3, 6, false)).getValorNumerico());
+        assertEquals(0,
+                (new Fracao(0, -6)).getValorNumerico());
+    }
+
+    @Test
+    public void testarGetFracaoIrredutivelParaFracaoJaIrredutivel() {
+        Fracao f = new Fracao(2, 7);
+        Fracao resultado = f.getFracaoIrredutivel();
+        assertTrue(resultado == f);  // precisam de fato ser o mesmo objeto!!!
+    }
+
+    @Test
+    public void testarGetFracaoIrredutivelParaFracaoRedutivel() {
+        Fracao f = new Fracao(20, 70);
+
+        Fracao resultado = f.getFracaoIrredutivel();
+        assertEquals(2, resultado.getNumerador());
+        assertEquals(7, resultado.getDenominador());
+        assertTrue(resultado.getSinal());
+
+        Fracao resultado2 = f.getFracaoIrredutivel();
+
+        assertTrue(resultado == resultado2);  // quero que sempre retorne o mesmo objeto
     }
 }
