@@ -8,6 +8,7 @@ public class Gerente extends Funcionario {
                    Banco bancoOndeTrabalha) {
         super(cpf, matricula, nome, bancoOndeTrabalha);
         this.subordinados = new ArrayList<>();
+        this.salario = Banco.SALARIO_BASE * 2;
     }
 
     public void adicionarSubordinado(Funcionario novoSubordinado) {
@@ -25,11 +26,7 @@ public class Gerente extends Funcionario {
 
     @Override
     public String toString() {
-        return "Gerente{" + getInfo() + "}";
-    }
-
-    protected String getInfo() {
-        return super.getInfo() +
+        return super.toString() +
                 ", tamanho da equipe=" + subordinados.size();
     }
 }

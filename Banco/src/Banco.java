@@ -9,7 +9,7 @@ public class Banco {
 
     private ArrayList<ContaCorrente> contasCorrentes;
 
-    private ArrayList<Funcionario> funcionarios;
+    private ArrayList<Funcionario> funcionarios;  // incluindo gerentes
 
     public Banco(String nome) {
         setNome(nome);
@@ -62,5 +62,28 @@ public class Banco {
         funcionarios.add(novoFuncionario);
 
         return novoFuncionario;
+    }
+
+    public Funcionario localizarFuncionario(int matricula) {
+        for (Funcionario f : this.funcionarios) {
+            if (f.getMatricula() == matricula) {
+                return f;
+            }
+        }
+        return null;
+    }
+
+    public Gerente localizarGerente(int matricula) {
+        Funcionario funcionario = localizarFuncionario(matricula);
+        if (funcionario != null & funcionario instanceof Gerente)  {
+            return (Gerente) funcionario;
+        }
+        return null;
+    }
+
+    public void promoverFuncionario(Funcionario funcionario) {
+        System.out.println("Proomvendo o funcionario " + funcionario.nome);
+        funcionario.salario *= 1.3f;
+        System.out.println(funcionario);
     }
 }

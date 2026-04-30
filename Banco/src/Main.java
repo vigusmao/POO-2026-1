@@ -10,5 +10,26 @@ public class Main {
                 "O banco " + meuBanco.getNome() + " possui " +
                         meuBanco.getNumeroDeContasCorrentes() +
                         " contas correntes.");
+
+        Funcionario funcionario1 = meuBanco.adicionarFuncionario(1111, "Um", false);
+        Funcionario funcionario2 = meuBanco.adicionarFuncionario(2222, "Dois", false);
+        Funcionario funcionario3 = meuBanco.adicionarFuncionario(3333, "Três", false);
+        Funcionario funcionario4 = meuBanco.adicionarFuncionario(4444, "Quatro", false);
+        Funcionario funcionario5 = meuBanco.adicionarFuncionario(5555, "Cinco", false);
+
+        Gerente gerente1 = (Gerente) meuBanco.adicionarFuncionario(11
+                , "Gerente Um", true);
+        Gerente gerente2 = (Gerente) meuBanco.adicionarFuncionario(
+                22, "Gerente Dois", true);
+
+        gerente1.adicionarSubordinado(funcionario1);
+        gerente1.adicionarSubordinado(funcionario2);
+        gerente1.adicionarSubordinado(funcionario3);
+
+        gerente2.adicionarSubordinado(funcionario4);
+        gerente2.adicionarSubordinado(funcionario5);
+
+        meuBanco.promoverFuncionario(funcionario3);
+        meuBanco.promoverFuncionario(gerente2);
     }
 }

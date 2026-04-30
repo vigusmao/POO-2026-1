@@ -2,7 +2,7 @@ public class Funcionario extends Pessoa {
 
     private final int matricula;  // chave primária
 
-    private float salario;
+    float salario;  // visível no package
 
     protected Banco bancoOndeTrabalha;
 
@@ -20,13 +20,13 @@ public class Funcionario extends Pessoa {
                 "Salário do funcionário %d = R$%.2f\n", matricula, salario);
     }
 
-    @Override
-    public String toString() {
-        return "Funcionario{" + getInfo() + "}";
+    public int getMatricula() {
+        return matricula;
     }
 
-    protected String getInfo() {
-        return super.getInfo() +
+    @Override
+    public String toString() {
+        return super.toString() +
                 ", matricula=" + matricula +
                 ", salario=" + salario;
     }

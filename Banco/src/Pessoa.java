@@ -11,11 +11,8 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" + getInfo() + "}";
-    }
-
-    protected String getInfo() {
-        return "cpf=" + cpf +
+        return this.getClass().getName() + ": " +
+                "cpf=" + cpf +
                 ", nome=" + nome;
     }
 }
