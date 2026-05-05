@@ -19,6 +19,14 @@ public class Main {
 
         Gerente gerente1 = (Gerente) meuBanco.adicionarFuncionario(11
                 , "Gerente Um", true);
+
+        funcionario5.avaliar(gerente1, 4);
+//        funcionario5.avaliar(funcionario4, 4);   //  <---- isso nem sequer compila!
+
+
+        System.out.println("Acabei de criar um gerente. Vou imprimi-lo.");
+        System.out.println(gerente1.toString());
+
         Gerente gerente2 = (Gerente) meuBanco.adicionarFuncionario(
                 22, "Gerente Dois", true);
 

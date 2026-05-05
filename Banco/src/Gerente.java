@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Gerente extends Funcionario {
+public class Gerente extends Funcionario implements Avaliavel {
 
     private ArrayList<Funcionario> subordinados;
 
@@ -28,5 +28,14 @@ public class Gerente extends Funcionario {
     public String toString() {
         return super.toString() +
                 ", tamanho da equipe=" + subordinados.size();
+    }
+
+    public void receberAvaliacao(int nota, Pessoa avaliador) {
+        // ToDo IMPLEMENT ME!!!
+    }
+
+    public float getAvaliacaoMedia() {
+        return 0;
+        // ToDo IMPLEMENT ME!!!
     }
 }

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Banco {
+public class Banco implements Avaliavel {
 
     public static final int TAMANHO_MAX_PRO_NOME = 10;
     public static final float SALARIO_BASE = 5_000f;
@@ -85,5 +85,14 @@ public class Banco {
         System.out.println("Proomvendo o funcionario " + funcionario.nome);
         funcionario.salario *= 1.3f;
         System.out.println(funcionario);
+    }
+
+    public void receberAvaliacao(int nota, Pessoa avaliador) {
+        // ToDo IMPLEMENT ME!!!
+    }
+
+    public float getAvaliacaoMedia() {
+        return 0;
+        // ToDo IMPLEMENT ME!!!
     }
 }
