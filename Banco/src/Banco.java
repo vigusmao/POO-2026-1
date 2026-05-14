@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Banco implements Avaliavel {
 
@@ -9,14 +12,45 @@ public class Banco implements Avaliavel {
 
     private ArrayList<ContaCorrente> contasCorrentes;
 
-    private ArrayList<Funcionario> funcionarios;  // incluindo gerentes
+    private Collection<Funcionario> funcionarios;  // incluindo gerentes
+    private Collection<Gerente> gerentes;  // incluindo gerentes
+
+    private Collection<Pessoa> clientes;
 
     public Banco(String nome) {
         setNome(nome);
         this.contasCorrentes = new ArrayList<>();  // composição
-        this.funcionarios = new ArrayList<>();  // composição
+        this.funcionarios = new LinkedList<>();  // composição
+        this.gerentes = new LinkedList<>();  // composição
+        this.clientes = new ArrayList<>();
     }
 
+    public void adicionarCliente(Pessoa pessoa) {
+        if (obterCliente(pessoa.cpf) == null) {
+            this.clientes.add(pessoa);
+        }
+    }
+
+    public void adicionarCliente(long cpf, String nome) {
+        Pessoa novoCliente = new Pessoa(cpf, nome);
+        adicionarCliente(novoCliente);
+    }
+    
+    private Pessoa obterCliente(long cpf) {
+        for (Pessoa p : this.clientes) {
+            if (p.cpf == cpf) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Funcionario obterFuncionarioDoMes() {
+//        return this.funcionarios.get(0);
+        return this.gerentes.get(0);
+        
+    }
+    
     public String getNome() {
         return this.nome;
     }
@@ -51,6 +85,7 @@ public class Banco implements Avaliavel {
         if (ehGerente) {
             novoFuncionario = new Gerente(
                     cpf, matricula, nome, this);
+            this.gerentes.add((Gerente) novoFuncionario);
             System.out.println(novoFuncionario.getClass());
 //            ((Gerente)novoFuncionario).adicionarSubordinado(null);  // aqui um typecast para Gerente seria seguro
 

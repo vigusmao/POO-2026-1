@@ -20,6 +20,13 @@ public class Main {
         Gerente gerente1 = (Gerente) meuBanco.adicionarFuncionario(11
                 , "Gerente Um", true);
 
+
+        Funcionario x = meuBanco.obterFuncionarioDoMes();
+
+        System.out.println("gerente1 instanceof Avaliavel = " + (x instanceof Avaliavel));
+        System.out.println(((Avaliavel) x).getAvaliacaoMedia());
+
+
         funcionario5.avaliar(gerente1, 4);
 //        funcionario5.avaliar(funcionario4, 4);   //  <---- isso nem sequer compila!
 
