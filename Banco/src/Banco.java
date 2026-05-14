@@ -35,7 +35,7 @@ public class Banco implements Avaliavel {
         Pessoa novoCliente = new Pessoa(cpf, nome);
         adicionarCliente(novoCliente);
     }
-    
+
     private Pessoa obterCliente(long cpf) {
         for (Pessoa p : this.clientes) {
             if (p.cpf == cpf) {
@@ -47,8 +47,8 @@ public class Banco implements Avaliavel {
 
     public Funcionario obterFuncionarioDoMes() {
 //        return this.funcionarios.get(0);
-        return this.gerentes.get(0);
-        
+        //return this.gerentes.get(0);
+        return null;
     }
     
     public String getNome() {
