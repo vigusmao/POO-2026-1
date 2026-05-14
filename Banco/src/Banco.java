@@ -36,7 +36,7 @@ public class Banco implements Avaliavel {
         adicionarCliente(novoCliente);
     }
 
-    private Pessoa obterCliente(long cpf) {
+    Pessoa obterCliente(long cpf) {
         for (Pessoa p : this.clientes) {
             if (p.cpf == cpf) {
                 return p;
