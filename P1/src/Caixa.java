@@ -3,7 +3,7 @@ public abstract class Caixa implements Guardador {
     private final float precoPorArmazenamentoEmReais;
     private int periodicidadeDeCobranca;
 
-    private Guardavel objetoGuardado;
+    protected Guardavel objetoGuardado;
 
     public static final int PESO_MAXIMO_EM_GRAMAS = 5000;
 
@@ -37,7 +37,7 @@ public abstract class Caixa implements Guardador {
     }
 
     @Override
-    public void esvaziar();
+    public abstract void esvaziar();
 
     private void cobrar() {
         System.out.printf("Emitindo Nota Fiscal no valor de R$%.2f",
