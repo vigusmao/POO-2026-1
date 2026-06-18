@@ -1,6 +1,10 @@
 package dominio;
 
-public class Veiculo {
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public abstract class Veiculo {
 
     private final int anoFabricacao;  // private é visível apenas de dentro da própria classe
                                       // final só pode ser incializado aqui mesmo ou no construtor, depois não pode mais mexer
@@ -15,6 +19,8 @@ public class Veiculo {
 
     private float velocidadeEmMetrosPorSegundo;
 
+    private List<String> destinosVisitados;
+
     public Veiculo(String nome, int capacidadePassageiros, int anoFabricacao) {
         this.capacidadePassageiros = capacidadePassageiros;
         this.anoFabricacao = anoFabricacao;
@@ -22,6 +28,7 @@ public class Veiculo {
         this.quilometrosRodados = 0;
         this.velocidadeEmMetrosPorSegundo = 0;
         this.nome = nome;
+        this.destinosVisitados = new ArrayList<>();
     }
 
     public void setCor(String cor) {
@@ -32,6 +39,10 @@ public class Veiculo {
         return cor;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public int getAnoFabricacao() {
         return anoFabricacao;
     }
@@ -40,18 +51,12 @@ public class Veiculo {
         return velocidadeEmMetrosPorSegundo;
     }
 
-    public void mover(float velocidade) {
-        System.out.println("Estou me movendo com velocidade " + velocidade);
-        this.velocidadeEmMetrosPorSegundo = velocidade;
-        // verificar se a velocidade não é muito alta ou muita baixa
-        // consumir combustível
-        // aumentar temperatura
-        // etc.
-    }
+    public abstract void mover(float velocidade);
 
     public void parar() {
         System.out.println(nome + " -- Parei!");
         this.velocidadeEmMetrosPorSegundo = 0;
+        this.destinosVisitados.add("Parei no destino tal");
     }
 
     public void colidir(Veiculo outro) {

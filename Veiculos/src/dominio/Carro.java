@@ -20,5 +20,8 @@ public class Carro extends Veiculo {
         System.out.println("FON FOOOOOOOOONNNN!!!!!!");
     }
 
-
+    @Override
+    public void mover(float velocidade) {
+        System.out.println("Injetando combustível no motor...");
+    }
 }
