@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Banco implements Avaliavel {
 
@@ -15,34 +12,28 @@ public class Banco implements Avaliavel {
     private Collection<Funcionario> funcionarios;  // incluindo gerentes
     private Collection<Gerente> gerentes;  // incluindo gerentes
 
-    private Collection<Pessoa> clientes;
+    private Map<Long, Pessoa> clientesPorCpf;  // valor: Long, chave: Pessoa
 
     public Banco(String nome) {
         setNome(nome);
         this.contasCorrentes = new ArrayList<>();  // composição
         this.funcionarios = new LinkedList<>();  // composição
         this.gerentes = new LinkedList<>();  // composição
-        this.clientes = new ArrayList<>();
+        this.clientesPorCpf = new HashMap<>();
     }
 
-    public void adicionarCliente(Pessoa pessoa) {
-        if (obterCliente(pessoa.cpf) == null) {
-            this.clientes.add(pessoa);
-        }
+    public Pessoa adicionarCliente(Pessoa pessoa) {
+        this.clientesPorCpf.put(pessoa.cpf, pessoa);
+        return pessoa;
     }
 
-    public void adicionarCliente(long cpf, String nome) {
+    public Pessoa adicionarCliente(long cpf, String nome) {
         Pessoa novoCliente = new Pessoa(cpf, nome);
-        adicionarCliente(novoCliente);
+        return adicionarCliente(novoCliente);
     }
 
     Pessoa obterCliente(long cpf) {
-        for (Pessoa p : this.clientes) {
-            if (p.cpf == cpf) {
-                return p;
-            }
-        }
-        return null;
+        return this.clientesPorCpf.get(cpf);
     }
 
     public Funcionario obterFuncionarioDoMes() {
@@ -129,5 +120,12 @@ public class Banco implements Avaliavel {
     public float getAvaliacaoMedia() {
         return 0;
         // ToDo IMPLEMENT ME!!!
+    }
+
+    public ContaCorrente abrirContaCorrente(Pessoa cliente) {
+        // ToDo verificar se cliente já tem conta, se cliente é mesmo cliente do banco, etc.
+
+        // ToDo IMPLEMERNT ME!!!!!!
+        return new ContaCorrente(17656213, cliente);
     }
 }

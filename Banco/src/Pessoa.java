@@ -33,4 +33,8 @@ public class Pessoa {
         avaliavel.receberAvaliacao(nota, this);
         // anotar em algum lugar que esta pessoa avaliou o banco tal.
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

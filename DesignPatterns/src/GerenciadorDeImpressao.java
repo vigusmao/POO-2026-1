@@ -16,7 +16,7 @@ public class GerenciadorDeImpressao {
         impressoras = new ArrayList<>();
     }
 
-    public void adicionarImpressora(Sing modelo, int quantidade) {
+    public void adicionarImpressora(String modelo, int quantidade) {
         // ToDo IMPLEMENT ME
     }
 

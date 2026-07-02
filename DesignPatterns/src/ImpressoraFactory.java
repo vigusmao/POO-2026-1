@@ -1,8 +1,8 @@
 public class ImpressoraFactory {
 
-    int contCriadas = 0;
+    static int contCriadas = 0;
 
-    public Impressora createImpressora() {
+    public static Impressora createImpressora() {
         int mod = contCriadas++ % 3;
         switch (mod) {
             case 0:
@@ -14,14 +14,18 @@ public class ImpressoraFactory {
         }
     }
 
-    public Impressora createImpressora(int tamanhoDoTexto) {
+    public static InterfaceImpressora createImpressora(int tamanhoDoTexto, boolean filtrarConteudo) {
+        Impressora imp;
         if (tamanhoDoTexto > 1000) {
-            return new ImpressoraLaser();
+            imp = new ImpressoraMatricial();
+        } else {
+            imp = new ImpressoraJatoDeTinta();
         }
-        return new ImpressoraJatoDeTinta();
+        return filtrarConteudo ? new ImpressoraDecoratorComFiltragemConteudo(imp)
+                               : imp;
     }
 
-    public Impressora createImpressora(String tipo) {
+    public static Impressora createImpressora(String tipo) {
         if (tipo.equalsIgnoreCase("laser")) {
             return new ImpressoraLaser();
         }

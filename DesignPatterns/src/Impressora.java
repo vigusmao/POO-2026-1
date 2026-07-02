@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
-public abstract class Impressora {
+public abstract class Impressora implements InterfaceImpressora {
 
     private List<ListenerParaFaltaDeTinta> listenersParaFaltaDeTinta;
-    private int autonomiaTinta = 1000;
+    private int autonomia = 1000;
 
     public Impressora() {
         this.listenersParaFaltaDeTinta = new ArrayList<>();
@@ -15,13 +14,18 @@ public abstract class Impressora {
         listenersParaFaltaDeTinta.add(novoListener);
     }
 
-    public void imprimir(String texto) {
+    protected abstract void executarImpressao(String texto);
+
+    public boolean imprimir(String texto) {
         int tamanho = texto.length();
-        if (autonomiaTinta < tamanho) {
-            // OPA!!!! ACABOU A TINTA!!!!!
+        if (autonomia < tamanho) {
+            // OPA!!!! REABASTECER!!!!!
             notifyFaltaDeTinta();
+            return false;
         }
-        autonomiaTinta -= tamanho;
+        executarImpressao(texto);
+        autonomia -= tamanho;
+        return true;
     }
 
     private void notifyFaltaDeTinta() {
